@@ -123,3 +123,20 @@ class App_Logger:
         )
 
         raise Exception(exception_msg)
+    
+    def stop_log(self):
+        """
+        Method Name :   stop_log
+        Description :   This method stops the logging for the system by exiting all the existing handlers
+
+        Output      :   Logging of information is stopped by python logger
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        try:
+            shutdown()
+
+        except Exception as e:
+            raise e
