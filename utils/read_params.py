@@ -43,4 +43,4 @@ def get_log_dic(class_name, method_name, file, log_file):
         }
         return log_dic
     except Exception as e:
-        raise Exception(f"Exception occured in {__file__}, Method: {method_name}, Error: {str(e)}")
+        raise Exception(f"Exception occured in {__file__}, Method: {_method_name}, Error: {str(e)}")
