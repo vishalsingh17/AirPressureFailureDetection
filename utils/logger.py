@@ -20,6 +20,7 @@ class App_Logger:
         """
         Method Name :    get_log_file
         Description :    This method gets gets the log file with path from log_file key
+        Written by  :   Vishal Singh
         
         Output      :     The log file with path is returned
         On Failure  :     Raise an exception
@@ -42,6 +43,7 @@ class App_Logger:
         """
         Method Name :   log
         Description :   This method writes the log info using current date and time
+        Written by  :   Vishal Singh
         
         Output      :   log information is written to file
         On Failure  :   Raise an exception
@@ -70,6 +72,7 @@ class App_Logger:
         """
         Method Name :   start_log
         Description :   This method creates an entry point log in log file
+        Written by  :   Vishal Singh
         
         Output      :   An entry log information is written to log file
         On Failure  :   Raise an exception
@@ -96,6 +99,7 @@ class App_Logger:
         """
         Method Name :   exception_log
         Description :   This method creates an exception log in log file and raises Exception
+        Written by  :   Vishal Singh
         
         Output      :   Exception information is written to log file
         On Failure  :   Raise an exception
@@ -128,6 +132,7 @@ class App_Logger:
         """
         Method Name :   stop_log
         Description :   This method stops the logging for the system by exiting all the existing handlers
+        Written by  :   Vishal Singh
 
         Output      :   Logging of information is stopped by python logger
         On Failure  :   Write an exception log and then raise an exception

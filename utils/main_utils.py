@@ -23,6 +23,7 @@ class Main_Utils:
         """
         Method Name :   create_dirs_for_good_bad_data
         Description :   This method creates folders for good and bad data in s3 bucket
+        Written by  :   Vishal Singh
 
         Output      :   Good and bad folders are created in s3 bucket
         On Failure  :   Write an exception log and then raise an exception
