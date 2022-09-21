@@ -91,3 +91,35 @@ class App_Logger:
             error_msg = f"Exception occured in Class : {class_name}, Method : {start_method_name}, Error : {str(e)}, Time : {datetime.now().strftime('%Y-%m-%d %H:%M:%S:%f')}"
             
             raise Exception(error_msg)
+        
+    def exception_log(self, exception, class_name, method_name, datentime, file, log_file):
+        """
+        Method Name :   exception_log
+        Description :   This method creates an exception log in log file and raises Exception
+        
+        Output      :   Exception information is written to log file
+        On Failure  :   Raise an exception
+        
+        Version     :   1.0
+        Revisions   :   None
+        """
+        _, _, exc_tb = exc_info()
+        
+        filename = split(exc_tb.tb_frame.f_code.co_filename)[1]
+        
+        exception_msg = f"Exception occured in Class : {class_name}, Method : {method_name}, Script : {filename}, Line : {exc_tb.tb_lineno}, Error : {str(exception)}, Time : {datetime.now().strftime('%Y-%m-%d %H:%M:%S:%f')}"
+        
+        log_file = self.get_log_file(log_file)
+        
+        basicConfig(filename=log_file, **self.log_params)
+        
+        error(
+            exception_msg,
+            extra={
+                "class_name": class_name,
+                "method_name": method_name,
+                "file_name": basename(file),
+            },
+        )
+
+        raise Exception(exception_msg)
