@@ -9,7 +9,7 @@ def read_params(config_path="parmas.yaml"):
     On Failure  :     Write an expection log and then raise an exception
     
     Version     :    1.0
-    Revison     :    None
+    Revisions     :    None
     """
     method_name = read_params.__name__
     
@@ -31,7 +31,7 @@ def get_log_dic(class_name, method_name, file, log_file):
     On Failure  :     Write an expection log and then raise an exception
     
     Version     :    1.0
-    Revison     :    None
+    Revisions     :    None
     """        
     _method_name = get_log_dic.__name__
     try:

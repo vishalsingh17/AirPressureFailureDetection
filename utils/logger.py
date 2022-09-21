@@ -25,7 +25,7 @@ class App_Logger:
         On Failure  :     Raise an exception
         
         Version     :    1.0
-        Revison     :    None
+        Revisions     :    None
         """
         try:
             makedirs(self.log_dir, exist_ok=True)
