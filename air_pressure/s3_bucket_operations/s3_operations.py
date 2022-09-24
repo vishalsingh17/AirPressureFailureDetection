@@ -1,5 +1,6 @@
 import imp
 import json
+from logging import exception
 import os
 import pickle
 from io import StringIO
@@ -50,3 +51,60 @@ class S3_Operations:
         )
 
         self.log_writer.start_log("Start", **log_dic)
+
+        try:
+            func = (
+                lambda: object.get()["Body"].read().decode()
+                if decode is True
+                else object.get()["Body"].read()
+            )
+
+            self.log_writer.log(
+                f"Read the s3 object with decode as {decode}", **log_dic
+            )
+
+            conv_func = lambda: StringIO(func()) if make_readable is True else func()
+
+            self.log_writer.log(
+                f"read the s3 object with make_readable as {make_readable}", **log_dic
+            )
+
+            self.log_writer.start_log("exit", **log_dic)
+
+            return conv_func()
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def read_text(self, fname, bucket, log_file):
+        """
+        Method Name :   read_text
+        Description :   This method reads the text data from s3 bucket
+
+        Output      :   Text data is read from s3 bucket
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.read_text.__name__, __file__, log_file
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            txt_obj = self.get_file_object(fname, bucket, log_file)
+
+            content = self.read_object(txt_obj, log_file)
+
+            self.log_writer.log(
+                f"Read {fname} file as text from {bucket} bucket", **log_dic
+            )
+
+            self.log_writer.start_log("exit", **log_dic)
+
+            return content
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
