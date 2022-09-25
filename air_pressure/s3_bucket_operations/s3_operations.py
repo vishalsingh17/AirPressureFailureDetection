@@ -108,3 +108,5 @@ class S3_Operations:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
+            
+            
