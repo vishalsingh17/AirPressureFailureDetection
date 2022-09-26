@@ -109,8 +109,7 @@ class S3_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
-            
+
     def read_json(self, fname, bucket, log_file):
         """
         Method Name :   read_json
@@ -122,16 +121,18 @@ class S3_Operation:
         Version     :   1.0
         Revisions   :   None
         """
-        log_dic = get_log_dic(self.__class__.__name__, self.read_json.__name__, __file__, log_file)
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.read_json.__name__, __file__, log_file
+        )
         self.log_writer.start_log("start", **log_dic)
-        
+
         try:
             f_obj = self.get_file_object(fname, bucket, log_file)
-            
+
             json_content = self.read_object(f_obj, log_file)
-            
+
             dic = json.loads(json_content)
-            
+
             self.log_writer.log(f"Read {fname} from {bucket} bucket", **log_dic)
 
             self.log_writer.start_log("exit", **log_dic)
@@ -140,7 +141,7 @@ class S3_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def get_df_from_object(self, object, log_file):
         """
         Method Name :   get_df_from_object
@@ -172,7 +173,7 @@ class S3_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def read_csv(self, fname, bucket, log_file):
         """
         Method Name :   read_csv
@@ -223,18 +224,22 @@ class S3_Operation:
             __file__,
             log_file,
         )
-        
+
         self.log_writer.start_log("start", **log_dic)
-        
+
         try:
             files = self.get_files_from_folder(folder_name, bucket, log_file)
-            
+
             lst = [
-                (self.read_csv(f, bucket, log_file), f, f.split("/")[-1],)
+                (
+                    self.read_csv(f, bucket, log_file),
+                    f,
+                    f.split("/")[-1],
+                )
                 for f in files
                 if f.endswith(".csv")
             ]
-            
+
             self.log_writer.log(
                 f"Read csv files from {folder_name} folder from {bucket} bucket",
                 **log_dic,
@@ -246,13 +251,13 @@ class S3_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def create_folder(self, folder_name, bucket, log_file):
         """
         Method Name :   create_folder
         Description :   This method creates a folder in s3 bucket
 
-        Output      :   A folder is created in s3 bucket 
+        Output      :   A folder is created in s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
         Version     :   1.0
@@ -291,7 +296,7 @@ class S3_Operation:
                 )
 
                 self.log_writer.exception_log(e, **log_dic)
-                
+
     def put_object(self, object, bucket, log_file):
         """
         Method Name :   put_object
@@ -373,7 +378,7 @@ class S3_Operation:
     def get_bucket(self, bucket, log_file):
         """
         Method Name :   get_bucket
-        Description :   This method gets the bucket from s3 
+        Description :   This method gets the bucket from s3
 
         Output      :   A s3 bucket name is returned based on the bucket
         On Failure  :   Write an exception log and then raise an exception
@@ -525,7 +530,7 @@ class S3_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def get_file_object(self, fname, bucket, log_file):
         """
         Method Name :   get_file_object
@@ -640,7 +645,10 @@ class S3_Operation:
             )
 
             self.upload_file(
-                model_file, bucket_model_path, model_bucket, log_file,
+                model_file,
+                bucket_model_path,
+                model_bucket,
+                log_file,
             )
 
             self.log_writer.log(
@@ -681,7 +689,10 @@ class S3_Operation:
             )
 
             self.upload_file(
-                local_fname, bucket_fname, bucket, log_file,
+                local_fname,
+                bucket_fname,
+                bucket,
+                log_file,
             )
 
             self.log_writer.start_log("exit", **log_dic)
