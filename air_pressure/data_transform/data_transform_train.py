@@ -7,9 +7,8 @@ class Data_Transform_Train:
     """
     Description :  This class shall be used for transforming the training batch data before loading it in Database!!.
 
-
-    Version     :   1.2
-    Revisions   :   Moved to setup to cloud
+    Version     :   1.0
+    Revisions   :   None
     """
 
     def __init__(self):
@@ -35,8 +34,8 @@ class Data_Transform_Train:
         Output      :   A csv file where all the string values have quotes inserted
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
