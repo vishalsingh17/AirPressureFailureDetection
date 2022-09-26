@@ -15,7 +15,7 @@ from utils.logger import App_Logger
 from utils.read_params import get_log_dic, read_params
 
 
-class S3_Operations:
+class S3_Operation:
     """
     Class Name  :   S3_Operations
     Description :   This method is used for all the S3 bucket operations
