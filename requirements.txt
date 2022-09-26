@@ -2,3 +2,4 @@ jupyter
 pandas
 pyYAML
 boto3
+imblearn
