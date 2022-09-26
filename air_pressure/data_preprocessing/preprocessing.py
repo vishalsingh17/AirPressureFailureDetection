@@ -13,9 +13,9 @@ from utils.read_params import get_log_dic, read_params
 
 class Preprocessor:
     """
-    Description : This class shall  be used to clean and transform the data before training.
-    Version     :   1.2
-    Revisions   :   moved setup to cloud
+    Description :   This class shall  be used to clean and transform the data before training.
+    Version     :   1.0
+    Revisions   :   None
     """
 
     def __init__(self, log_file):
@@ -45,8 +45,8 @@ class Preprocessor:
         Output      :   A pandas DataFrame after removing the specified columns.
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -81,8 +81,8 @@ class Preprocessor:
         Output      :   Returns two separate dataframes, one containing features and the other containing Labels .
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -115,8 +115,8 @@ class Preprocessor:
         Output      :   A dataframe without invalid values is returned
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -148,8 +148,8 @@ class Preprocessor:
                         returns the list of columns for which null values are present.
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -223,8 +223,8 @@ class Preprocessor:
         Output      :   A dataframe which has target values encoded.
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -255,8 +255,8 @@ class Preprocessor:
         Output      :   A dataframe which has all the missing values imputed.
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -301,8 +301,8 @@ class Preprocessor:
         Output      : A dataframe with scaled values
         On Failure  : Write an exception log and then raise an exception
 
-        Version     : 1.2
-        Revisions   : moved setup to cloud
+        Version     : 1.0
+        Revisions   : None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -351,8 +351,8 @@ class Preprocessor:
         Output      : A dataframe with scaled values
         On Failure  : Write an exception log and then raise an exception
 
-        Version     : 1.2
-        Revisions   : moved setup to cloud
+        Version     : 1.0
+        Revisions   : None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -399,8 +399,8 @@ class Preprocessor:
         Output      :   List of the columns with standard deviation of zero
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
