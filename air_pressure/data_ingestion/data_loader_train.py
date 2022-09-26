@@ -6,8 +6,8 @@ class Data_Getter_Train:
     """
     Description :   This class shall be used for obtaining the df from the input files s3 bucket where the training file is present
     
-    Version     :   1.2
-    Revisions   :   Moved to setup to cloud
+    Version     :   1.0
+    Revisions   :   None
     """
     
     def __init__(self, log_file):
@@ -31,8 +31,8 @@ class Data_Getter_Train:
         
         On Failure  :   Write an exception log and then raise exception
         
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.get_data.__name__, __file__, self.log_file
