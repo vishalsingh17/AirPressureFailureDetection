@@ -119,8 +119,8 @@ class S3_Operations:
         Output      :   Json data is read from s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(self.__class__.__name__, self.read_json.__name__, __file__, log_file)
         self.log_writer.start_log("start", **log_dic)
@@ -149,8 +149,8 @@ class S3_Operations:
         Output      :   Json data is read from s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -181,8 +181,8 @@ class S3_Operations:
         Output      :   A pandas series object consisting of runs for the particular experiment id
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.read_csv.__name__, __file__, log_file
@@ -214,8 +214,8 @@ class S3_Operations:
         Output      :   A list of tuple of dataframe, along with absolute file name and file name is returned
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -255,8 +255,8 @@ class S3_Operations:
         Output      :   A folder is created in s3 bucket 
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.create_folder.__name__, __file__, log_file
@@ -300,8 +300,8 @@ class S3_Operations:
         Output      :   An object is put in s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.put_object.__name__, __file__, log_file
@@ -329,8 +329,8 @@ class S3_Operations:
         Output      :   A file is uploaded to s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.upload_file.__name__, __file__, log_file
@@ -378,8 +378,8 @@ class S3_Operations:
         Output      :   A s3 bucket name is returned based on the bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.get_bucket.__name__, __file__, log_file
@@ -407,8 +407,8 @@ class S3_Operations:
         Output      :   The data is copied from one bucket to another
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.copy_data.__name__, __file__, log_file
@@ -439,8 +439,8 @@ class S3_Operations:
         Output      :   The file is deleted from s3 bucket
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__, self.delete_file.__name__, __file__, log_file
@@ -466,8 +466,8 @@ class S3_Operations:
         Output      :   The data is moved from one bucket to another
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         method_name = self.move_data.__name__
 
@@ -500,8 +500,8 @@ class S3_Operations:
         Output      :   A list of files is returned
         On Failure  :   Write an exception log and then raise an exception
 
-        Version     :   1.2
-        Revisions   :   moved setup to cloud
+        Version     :   1.0
+        Revisions   :   None
         """
         log_dic = get_log_dic(
             self.__class__.__name__,
@@ -522,6 +522,169 @@ class S3_Operations:
             self.log_writer.start_log("exit", **log_dic)
 
             return list_of_files
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+            
+    def get_file_object(self, fname, bucket, log_file):
+        """
+        Method Name :   get_file_object
+        Description :   This method gets the file object from s3 bucket
+
+        Output      :   A file object is returned
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.get_file_object.__name__, __file__, log_file
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            bucket = self.get_bucket(bucket, log_file)
+
+            lst_objs = [object for object in bucket.objects.filter(Prefix=fname)]
+
+            self.log_writer.log(f"Got {fname} from bucket {bucket}", **log_dic)
+
+            func = lambda x: x[0] if len(x) == 1 else x
+
+            file_objs = func(lst_objs)
+
+            self.log_writer.start_log("exit", **log_dic)
+
+            return file_objs
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def load_model(self, model_name, bucket, log_file, model_dir=None):
+        """
+        Method Name :   load_model
+        Description :   This method loads the model from s3 bucket
+
+        Output      :   A pandas series object consisting of runs for the particular experiment id
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.load_model.__name__, __file__, log_file
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            func = (
+                lambda: model_name + self.file_format
+                if model_dir is None
+                else model_dir + "/" + model_name + self.file_format
+            )
+
+            model_file = func()
+
+            self.log_writer.log(f"Got {model_file} as model file", **log_dic)
+
+            f_obj = self.get_file_object(model_file, bucket, log_file)
+
+            model_obj = self.read_object(f_obj, log_file, decode=False)
+
+            model = pickle.loads(model_obj)
+
+            self.log_writer.log(f"Loaded {model_name} from bucket {bucket}", **log_dic)
+
+            self.log_writer.start_log("exit", **log_dic)
+
+            return model
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def save_model(self, model, model_dir, model_bucket, log_file, idx=None):
+        """
+        Method Name :   save_model
+        Description :   This method saves the model into particular model directory in s3 bucket with kwargs
+
+        Output      :   A pandas series object consisting of runs for the particular experiment id
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.save_model.__name__, __file__, log_file
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            model_name = model.__class__.__name__
+
+            model_file = model_name + self.file_format
+
+            with open(file=model_file, mode="wb") as f:
+                pickle.dump(model, f)
+
+            self.log_writer.log(
+                f"Saved {model_name} model as {model_file} name", **log_dic
+            )
+
+            bucket_model_path = model_dir + "/" + model_file
+
+            self.log_writer.log(
+                f"Uploading {model_file} to {model_bucket} bucket", **log_dic
+            )
+
+            self.upload_file(
+                model_file, bucket_model_path, model_bucket, log_file,
+            )
+
+            self.log_writer.log(
+                f"Uploaded  {model_file} to {model_bucket} bucket", **log_dic
+            )
+
+            self.log_writer.start_log("exit", **log_dic)
+
+        except Exception as e:
+            self.log_writer.log(
+                f"Model file {model_name} could not be saved", **log_dic
+            )
+
+            self.log_writer.exception_log(e, **log_dic)
+
+    def upload_df_as_csv(self, data_frame, local_fname, bucket_fname, bucket, log_file):
+        """
+        Method Name :   upload_df_as_csv
+        Description :   This method uploades a dataframe as csv file to s3 bucket
+
+        Output      :   A dataframe is uploaded as csv file to s3 bucket
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.0
+        Revisions   :   None
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__, self.upload_df_as_csv.__name__, __file__, log_file
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            data_frame.to_csv(local_fname, index=None, header=True)
+
+            self.log_writer.log(
+                f"Created a local copy of dataframe with name {local_fname}", **log_dic
+            )
+
+            self.upload_file(
+                local_fname, bucket_fname, bucket, log_file,
+            )
+
+            self.log_writer.start_log("exit", **log_dic)
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
