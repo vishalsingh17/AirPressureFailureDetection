@@ -7,24 +7,25 @@ from pymongo import MongoClient
 from utils.logger import App_Logger
 from utils.read_params import get_log_dic, read_params
 
+
 class MongoDB_Operation:
     """
     Description :   This method is used for all mongodb operations
     Written by  :   Vishal Singh
-    
+
     Version     :   1.0
     Revisions   :   None
     """
-    
+
     def __init__(self):
         self.config = read_params()
-        
+
         self.DB_URL = os.environ["MONGODB_URL"]
-        
+
         self.client = MongoClient(self.DB_URL)
-        
+
         self.log_writer = App_Logger()
-        
+
     def get_database(self, db_name, log_file):
         """
         Method Name :   get_database
@@ -53,7 +54,7 @@ class MongoDB_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def get_collection(self, database, collection_name, log_file):
         """
         Method Name :   get_collection
@@ -84,7 +85,7 @@ class MongoDB_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-            
+
     def get_collection_as_dataframe(self, db_name, collection_name, log_file):
         """
         Method Name :   get_collection_as_dataframe
@@ -166,4 +167,3 @@ class MongoDB_Operation:
 
         except Exception as e:
             self.log_writer.exception_log(e, **log_dic)
-    
