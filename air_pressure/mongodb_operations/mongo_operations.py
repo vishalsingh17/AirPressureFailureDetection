@@ -95,7 +95,7 @@ class MongoDB_Operation:
         On Failure  :   Write an exception log and then raise an exception
 
         Version     :   1.0
-        Written by  :   iNeuron Intelligence
+        Written by  :   Vishal Singh
         Revisions   :   None
         """
         log_dic = get_log_dic(
