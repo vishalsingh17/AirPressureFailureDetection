@@ -3,3 +3,4 @@ pandas
 pyYAML
 boto3
 imblearn
+mlflow
