@@ -150,23 +150,114 @@ class MLFlow_Operation:
         Revisions   :   moved setup to cloud
         """
 
-    # log_dic = get_log_dic(
-    #     self.__class__.__name__,
-    #     self.get_mlflow_client.__name__,
-    #     __file__,
-    #     self.log_file,
-    # )
+        log_dic = get_log_dic(
+            self.__class__.__name__,
+            self.get_mlflow_client.__name__,
+            __file__,
+            self.log_file,
+        )
 
-    # self.log_writer.start_log("start", **log_dic)
+        self.log_writer.start_log("start", **log_dic)
 
-    # try:
-    #     client = MlflowClient(tracking_uri=server_uri)
+        try:
+            client = MlflowClient(tracking_uri=server_uri)
 
-    #     self.log_writer.log("Got mlflow client with tracking uri", **log_dic)
+            self.log_writer.log("Got mlflow client with tracking uri", **log_dic)
 
-    #     self.log_writer.start_log("exit", **log_dic)
+            self.log_writer.start_log("exit", **log_dic)
 
-    #     return client
+            return client
 
-    # except Exception as e:
-    #     self.log_writer.exception_log(e, **log_dic)
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def set_mlflow_tracking_uri(self):
+        """
+        Method Name :   set_mlflow_tracking_uri
+        Description :   This method sets the mlflow tracking uri in mlflow server
+
+        Output      :   MLFLow server will set the particular uri to communicate with code
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.2
+
+        Revisions   :   moved setup to cloud
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__,
+            self.set_mlflow_tracking_uri.__name__,
+            __file__,
+            self.log_file,
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            server_uri = os.environ["MLFLOW_TRACKING_URI"]
+
+            mlflow.set_tracking_uri(server_uri)
+
+            self.log_writer.log("Set mlflow tracking uri", **log_dic)
+
+            self.log_writer.start_log("exit", **log_dic)
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def get_mlflow_models(self):
+        """
+        Method Name :   get_mlflow_models
+        Description :   This method gets the registered models in mlflow server
+
+        Output      :   A list of registered model names stored in mlflow server
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.2
+
+        Revisions   :   moved setup to cloud
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__,
+            self.get_mlflow_models.__name__,
+            __file__,
+            self.log_file,
+        )
+
+        self.log_writer.start_log("start", **log_dic)
+
+        try:
+            remote_server_uri = os.environ(["MLFLOW_TRACKING_URI"])
+
+            client = self.get_mlflow_client(server_uri=remote_server_uri)
+
+            reg_model_names = [rm.name for rm in client.list_registered_models()]
+
+            self.log_writer.log("Got registered models from mlflow", **log_dic)
+
+            self.log_writer.start_log("exit", **log_dic)
+
+            return reg_model_names
+
+        except Exception as e:
+            self.log_writer.exception_log(e, **log_dic)
+
+    def search_mlflow_models(self, order):
+        """
+        Method Name :   search_mlflow_models
+        Description :   This method searches for registered models and returns them in the mentioned order
+
+        Output      :   A list of registered models in the mentioned order
+        On Failure  :   Write an exception log and then raise an exception
+
+        Version     :   1.2
+
+        Revisions   :   moved setup to cloud
+        """
+        log_dic = get_log_dic(
+            self.__class__.__name__,
+            self.search_mlflow_models.__name__,
+            __file__,
+            self.log_file,
+        )
+
+        self.log_writer.start_log("start", **log_dic)
